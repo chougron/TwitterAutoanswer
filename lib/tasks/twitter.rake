@@ -41,12 +41,11 @@ namespace :twitter do
 
                 print "The DM will be :\n"
                 print message + "\n"
-                client.create_direct_message(770128077406035968, message)
-                #client.create_direct_message(user.id, message)
-                #follower = Follower.new()
-                #follower.twitter_id = user.id
-                #follower.name = user.name
-                #follower.save
+                client.create_direct_message(user.id, message)
+                follower = Follower.new()
+                follower.twitter_id = user.id
+                follower.name = user.name
+                follower.save
             end
         end
     end

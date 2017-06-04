@@ -1,24 +1,31 @@
-# README
+# Requirements
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Working with Ruby 2.3.1 and Rails 5.1.1
 
-Things you may want to cover:
+You will also need to install the twitter gem 
 
-* Ruby version
+`gem install twitter`
 
-* System dependencies
+# Installation
 
-* Configuration
+Install the database with the following command :
 
-* Database creation
+`bin/rails db:migrate`
 
-* Database initialization
+# Usage
 
-* How to run the test suite
+You need to first set the configuration for the twitter API (to generate at https://apps.twitter.com). You will need Read, write and direct messages permission.
 
-* Services (job queues, cache servers, search engines, etc.)
+`bin/rails twitter:set_config consumer_key consumer_secret access_token access_token_secret`
 
-* Deployment instructions
+You also need to configure the message that you want to send to your new followers. You can use the variable #NAME that will be replaced with the screen name of the follower.
 
-* ...
+`bin/rails settings:set_message "Hello #NAME, this is a message for my new followers."`
+
+Then, load the list of your current followers, to compare with the future list and send DM to your new followers.
+
+`bin/rails twitter:init_list`
+
+Finally, you can set a cron job or manually send DM to your new followers with the following command :
+
+`bin/rails twitter:send_dm`
